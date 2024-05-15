@@ -8,7 +8,7 @@
 <body>
 
 <label for="name">Name:</label>
-<input type="text" id="name" name="name"><br>
+<input type="text" id="name" name="name" oninput="removeNumbers(this)"><br>
 <label for="age">Age:</label>
 <input type="number" id="age" name="age" ><br>
 <button onclick="addToTable()">Add</button>
@@ -23,6 +23,11 @@
 <script>
   var counter = 1; // To generate the serial number
   
+  function removeNumbers(input) {
+      // Remove all numeric characters
+      input.value = input.value.replace(/[0-9]/, '');
+  }
+
   function addToTable() {
       // Get the input values
       var nameInput = document.getElementById("name").value;
@@ -31,6 +36,12 @@
       // Validate the age input
       if (ageInput < 1 || ageInput > 100) {
           alert("Please enter an age between 1 and 100.");
+          return;
+      }
+      
+      // Validate the name input (optional, e.g., ensure it's not empty)
+      if (nameInput.trim() === "") {
+          alert("Name cannot be empty.");
           return;
       }
       
